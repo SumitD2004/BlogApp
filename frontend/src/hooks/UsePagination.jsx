@@ -1,33 +1,35 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
+function usePagination(path, queryParams = {}, limit = 1, page = 1) {
+  const [hasMore, setHasMore] = useState(true);
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function fetchSeachBlogs() {
+      try {
+        // Removed undefined startLoading call
+        let res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/${path}`,
+          {
+            params: { ...queryParams, limit, page },
+          }
+        );
+        setBlogs((prev) => [...prev, ...res.data.blogs]);
+        setHasMore(res?.data?.hasMore);
+      } catch (error) {
+        navigate(-1);
+        setBlogs([]);
+        toast.error(error?.response?.data?.message);
+        setHasMore(false);
+      }
+    }
+    fetchSeachBlogs();
+  }, [page]);
 
-function UsePagination(path , queryParams = {} , limit = 1 , page = 1 ) {
-
-    const [blogs, setBlogs] = useState([]);
-    const [hasMore , setHasMore] = useState(true);
-
-    useEffect(() => {
-            async function fetchSearchBlogs(){
-                try {
-                    let res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/${path}` , {
-                       params:{ ...queryParams , limit, page} ,
-                    });
-                    // console.log(res.data);
-                    toast.success(res.data.message);
-                    setBlogs((prev) => [...prev , ...res.data.blogs])
-                    setHasMore(res.data.hasMore);
-                } 
-                catch (error) {
-                  setBlogs([])
-                  console.log(error);
-                }
-            }
-            fetchSearchBlogs();
-    }, [page]);
-
-    return {blogs,hasMore};
+  return { blogs, hasMore };
 }
 
-export default UsePagination
+export default usePagination;

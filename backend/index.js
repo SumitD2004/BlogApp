@@ -18,7 +18,7 @@ const app = express();
 
 // middlewares
 app.use(express.json());
-app.use(cors({origin : FRONTEND_URL}));//It allows the frontend running at http://localhost:5173 to make HTTP requests (GET, POST, etc.) to this backend.
+app.use(cors({origin : "*"}));//It allows the frontend running at http://localhost:5173 to make HTTP requests (GET, POST, etc.) to this backend.
 
 
 

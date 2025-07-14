@@ -366,7 +366,7 @@ async function particularUser(req, res){ // get a particular user
     try{
         const username  = req.params.username;
         // console.log(username)
-        const user = await User.findOne({username}).populate(
+        const user = await User.findOne({ username: new RegExp(`^${username}$`, 'i') }).populate(
             "blogs followers following likeBlogs saveBlogs").populate({
                 path : "followers following",
                 select : "name username",

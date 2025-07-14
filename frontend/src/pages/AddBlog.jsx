@@ -99,7 +99,7 @@ function AddBlog() {
         //     formData.append("image", blogData.image);
         // }
         const res = await axios.patch(
-            `${import.meta.env.VITE_BACKEND_URL}/blogs/${id}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/${id}`,
             formData,
             {
                 headers: {
@@ -134,7 +134,7 @@ function AddBlog() {
         
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/blogs` ,
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs` ,
                 formData,
                 {
                     headers : { // we added headers because we want to send token 

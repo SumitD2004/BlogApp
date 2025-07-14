@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
     password : {
         type : String,
         unique : true,
-        select : false, // **means me bhejna nhi chahta password ko frontend me.
     },
     blogs : [ // number of blogs posted by user.
         {
@@ -31,12 +30,10 @@ const userSchema = new mongoose.Schema({
     verify : {
         type : Boolean,
         default : false,
-        select :  false,
     },
     googleAuth :{
         type : Boolean,
         default : false,
-        select :  false,
     },
     profilePic :{
         type : String,

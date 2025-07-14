@@ -11,7 +11,7 @@ function VerifyUser() {
     useEffect(() =>{
         async function verifyUser(){
           try {
-              const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/verify-email/${verificationToken}`);
+              const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/verify-email/${verificationToken}`);
               console.log(res)
               toast.success(res.data.message);
           } 

@@ -19,7 +19,7 @@ function Comment() {
 
     async function handleComment() {
         try {
-            let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/blogs/comment/${blogId}` ,
+            let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/comment/${blogId}` ,
                 {
                     comment,
                 },
@@ -79,7 +79,7 @@ function DisplayComments({comments , userId , blogId , token , setActiveReply , 
 
     async function handleReply(parentCommentId){
         try {
-            let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/comment/${parentCommentId}/${blogId}` ,
+            let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/comment/${parentCommentId}/${blogId}` ,
                 {
                     reply, // ye req body me jayega
                 },
@@ -102,7 +102,7 @@ function DisplayComments({comments , userId , blogId , token , setActiveReply , 
 
     async function handleCommentLike(commentId){
         try {
-            const res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/blogs/like-comment/${commentId}` ,
+            const res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/like-comment/${commentId}` ,
                 {},
                 {
                     headers :{
@@ -124,7 +124,7 @@ function DisplayComments({comments , userId , blogId , token , setActiveReply , 
 
     async function handleCommentUpdate(id){ // comment id
         try {
-            const res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/blogs/edit-comment/${id}` ,
+            const res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/edit-comment/${id}` ,
                 {
                     updatedCommentContent,
                 },
@@ -149,7 +149,7 @@ function DisplayComments({comments , userId , blogId , token , setActiveReply , 
 
     async function handleCommentDelete(id){
         try {
-            const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/blogs/comment/${id}` ,
+            const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/comment/${id}` ,
                 {
                     headers :{
                         "Authorization" : `Bearer ${token}`,

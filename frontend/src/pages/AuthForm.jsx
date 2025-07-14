@@ -29,7 +29,7 @@ function AuthForm({type}) { // receiving props
 
               // or using axios
 
-              const res = await axios.post(`http://localhost:3000/api/v1/${type}` , userData); // sends http post req and receive a response
+              const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/${type}` , userData); // sends http post req and receive a response
               // console.log(res);
 
               if(type=="signup"){

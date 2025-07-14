@@ -14,7 +14,7 @@ import { formatDate } from "../utils/formatDate";
 export async function handleSaveBlog(id , token){
     // console.log(id , token);
         try {
-            let res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/save-blog/${id}`,
+            let res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/save-blog/${id}`,
                 {},
                 {
                     headers : {
@@ -34,7 +34,7 @@ export async function handleSaveBlog(id , token){
 
 export async function handleFollowCreator(id , token){
     try {
-            let res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/follow/${id}`,
+            let res = await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/follow/${id}`,
                 {},
                 {
                     headers : {
@@ -71,7 +71,7 @@ function BlogPage() {
     async function fetchBlogById(){
 
         try {
-            let {data : {blog}} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blogs/${id}`);
+            let {data : {blog}} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/${id}`);
             // console.log(res);
             setBlogData(blog);
             if(blog.likes.includes(userId)){
@@ -91,7 +91,7 @@ function BlogPage() {
         if(token){
             setIsLike((prev) => !prev);
             let res = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/blogs/like/${blogData._id}`,{},
+                `${import.meta.env.VITE_BACKEND_URL}/api/v1/blogs/like/${blogData._id}`,{},
                 {
                     headers : {
                         Authorization : `Bearer ${token}`

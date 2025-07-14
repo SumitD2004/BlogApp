@@ -24,7 +24,7 @@ function Setting() {
       const res = await axios.patch(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/change-saved-liked-blog-visibility`,
+        }/api/v1/change-saved-liked-blog-visibility`,
         data,
         {
           headers: {
