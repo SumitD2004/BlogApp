@@ -21,6 +21,12 @@ app.use(express.json());
 app.use(cors({origin : FRONTEND_URL}));//It allows the frontend running at http://localhost:5173 to make HTTP requests (GET, POST, etc.) to this backend.
 
 
+
+app.get('/' , (req,res)=>{
+    res.send("Hello Guys!!");
+})
+
+
 // **connecting routes using middleware in main server file**
 //it gets invoked when there will requests at root path . 
 app.use('/api/v1' , userRoute); // mouting routes at root path "/" .-> api versioning all the routes by this.

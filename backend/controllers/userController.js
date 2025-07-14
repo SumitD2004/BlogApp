@@ -174,7 +174,6 @@ async function googleAuth(req,res){
 
         if(user){
             // already registered
-
             if(user.googleAuth){
                 let token = await generateJWT({email : newUser.email , id : newUser._id} );
 
@@ -203,9 +202,8 @@ async function googleAuth(req,res){
                     
                 })
             }
-
-            
         }
+        const username = email.split("@")[0] + randomUUID();
 
         let newUser = await User.create({
                 name,
@@ -233,7 +231,7 @@ async function googleAuth(req,res){
                 following : newUser.following,
                 followers : newUser.followers,
                 bio : newUser.bio,
-                username : newUser.bio,
+                username : newUser.username,
                 profilePic : newUser.profilePic,
                 token
             },
@@ -244,7 +242,8 @@ async function googleAuth(req,res){
     } 
     catch (error) {
         res.status(500).json({message : "Something went wrong!!",
-            error : err.message
+            success : false,
+            error : error.message
         })
     }
 }
